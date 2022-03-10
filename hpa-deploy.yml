@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-hpa
+  labels:
+    app: hpa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hpa
+  template:
+    metadata:
+      name: test-hpa
+      labels:
+        app: hpa
+    spec:
+      containers:
+        - name: hpa
+          image: k8s.gcr.io/hpa-example
+          resources:
+            requests:
+              cpu: "200m"
+            limits:
+              cpu: "500m"
